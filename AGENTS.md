@@ -53,3 +53,8 @@ You are an expert in TypeScript, Angular, and scalable web application developme
 - Design services around a single responsibility
 - Use the `providedIn: 'root'` option for singleton services
 - Use the `inject()` function instead of constructor injection
+
+## Architecture
+- `components/` — Cada componente debe tener un archivo html y otro ts
+- `services/` — La lógica del frontend y que permita la comunicación con el backend
+- `models/` — La estructura de los datos a recibir y enviar 

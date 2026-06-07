@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="header">
+    <h1>Personas</h1>
+    <a class="btn btn-primary" routerLink="/personas/new">New Persona</a>
+  </div>
+
+  @if (service.loading()) {
+    <p class="loading">Loading...</p>
+  } @else if (service.error(); as err) {
+    <p class="error">{{ err }}</p>
+  } @else if (service.personas(); as list) {
+    @if (list.length === 0) {
+      <p class="empty">No personas found. Create one!</p>
+    } @else {
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (p of list; track p.docIdentidad) {
+            <tr (click)="navigateTo(p.docIdentidad)" class="clickable">
+              <td>{{ p.docIdentidad }}</td>
+              <td>{{ p.nombre }}</td>
+              <td>{{ p.apellido }}</td>
+              <td>{{ p.edad }}</td>
+              <td>{{ p.email }}</td>
+              <td>
+                <button class="btn btn-danger" (click)="$event.stopPropagation(); confirmDelete(p.docIdentidad)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+</div>

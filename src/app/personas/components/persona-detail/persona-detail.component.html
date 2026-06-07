@@ -1,0 +1,34 @@
+<div class="container">
+  <a class="back" routerLink="/personas">&larr; Back to list</a>
+
+  @if (loading) {
+    <p class="loading">Loading...</p>
+  } @else if (notFound) {
+    <p class="not-found">Persona not found.</p>
+    <a routerLink="/personas" class="btn btn-secondary">Back to list</a>
+  } @else if (persona) {
+    <h1>{{ persona.nombre }} {{ persona.apellido }}</h1>
+
+    <dl>
+      <dt>Document ID</dt>
+      <dd>{{ persona.docIdentidad }}</dd>
+
+      <dt>Name</dt>
+      <dd>{{ persona.nombre }}</dd>
+
+      <dt>Last Name</dt>
+      <dd>{{ persona.apellido }}</dd>
+
+      <dt>Age</dt>
+      <dd>{{ persona.edad }}</dd>
+
+      <dt>Email</dt>
+      <dd>{{ persona.email }}</dd>
+    </dl>
+
+    <div class="actions">
+      <a class="btn btn-primary" [routerLink]="['/personas', persona.docIdentidad, 'edit']">Edit</a>
+      <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+    </div>
+  }
+</div>

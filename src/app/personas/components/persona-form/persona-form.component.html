@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>{{ isEdit ? 'Edit' : 'New' }} Persona</h1>
+
+  @if (backendError) {
+    <p class="error">{{ backendError }}</p>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="field">
+      <label for="docIdentidad">Document ID</label>
+      <input id="docIdentidad" formControlName="docIdentidad" [attr.disabled]="isEdit ? '' : null" />
+      @if (form.get('docIdentidad')?.invalid && form.get('docIdentidad')?.touched) {
+        <small class="field-error">Document ID is required</small>
+      }
+    </div>
+
+    <div class="field">
+      <label for="nombre">Name</label>
+      <input id="nombre" formControlName="nombre" />
+      @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+        <small class="field-error">Name is required</small>
+      }
+    </div>
+
+    <div class="field">
+      <label for="apellido">Last Name</label>
+      <input id="apellido" formControlName="apellido" />
+      @if (form.get('apellido')?.invalid && form.get('apellido')?.touched) {
+        <small class="field-error">Last name is required</small>
+      }
+    </div>
+
+    <div class="field">
+      <label for="edad">Age</label>
+      <input id="edad" type="number" formControlName="edad" />
+      @if (form.get('edad')?.invalid && form.get('edad')?.touched) {
+        <small class="field-error">Age must be greater than 0</small>
+      }
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" />
+      @if (form.get('email')?.invalid && form.get('email')?.touched) {
+        <small class="field-error">Valid email is required</small>
+      }
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || submitting">
+        {{ isEdit ? 'Update' : 'Create' }}
+      </button>
+      <a class="btn btn-secondary" routerLink="/personas">Cancel</a>
+    </div>
+  </form>
+</div>
